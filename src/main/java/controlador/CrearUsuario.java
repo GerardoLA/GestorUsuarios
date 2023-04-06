@@ -58,7 +58,7 @@ public class CrearUsuario extends HttpServlet {
 		
 		
 		try {
-			fecha_login=new SimpleDateFormat("yyyy-mm-dd").parse(request.getParameter("fecha_login"));
+			fecha_login=new SimpleDateFormat("dd-mm-yyyy").parse(request.getParameter("fecha_login"));
 			
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
@@ -74,25 +74,7 @@ public class CrearUsuario extends HttpServlet {
 			}
 			response.sendRedirect("Principal");
 		
-			
-//	
-//		try {
-//			
-//			try {
-//				fecha_login = new SimpleDateFormat("dd-MM-yyyy").parse(request.getParameter("fecha_login"));
-//			} catch (ParseException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//			usuario.setFecha_login(fecha_login);
-//			usuarioMod.crearUsuario(usuario);
-//			usuarioMod.getConexion().close();
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-		
-		
-		
+					
 		
 	}
 
