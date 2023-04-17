@@ -58,7 +58,7 @@ public class CrearUsuario extends HttpServlet {
 		
 		
 		try {
-			fecha_login=new SimpleDateFormat("dd-mm-yyyy").parse(request.getParameter("fecha_login"));
+			fecha_login=new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("fecha_login"));
 			
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
