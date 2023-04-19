@@ -117,7 +117,7 @@ public Usuario getUsuario(int id) {
 			
 		
 	} catch (SQLException e) {
-		// TODO Auto-generated catch block
+		
 		e.printStackTrace();
 	}
 	return usuario;
