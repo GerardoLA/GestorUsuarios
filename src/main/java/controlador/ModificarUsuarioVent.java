@@ -2,6 +2,7 @@ package controlador;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,8 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import modelo.Usuario;
-import modelo.UsuarioModelo;
+import modelo.*;
 
 /**
  * Servlet implementation class ModificarFormulario
@@ -36,10 +36,13 @@ public class ModificarUsuarioVent extends HttpServlet {
 		
 		int id=Integer.parseInt(request.getParameter("id")) ;
 		
-		
+		ArrayList<Rol>roles=new ArrayList<Rol>();
 		try {
 			usuario=usuarioMod.getUsuario(id);
 			usuarioMod.getConexion().close();
+			RolModelo rolMod= new RolModelo();
+			roles = rolMod.getRoles();
+			rolMod.getConexion().close();
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -47,7 +50,7 @@ public class ModificarUsuarioVent extends HttpServlet {
 		}
 		
 		request.setAttribute("usuario", usuario);
-		
+		request.setAttribute("roles", roles);
 		
 		
 		request.getRequestDispatcher("ModificarUsuario.jsp").forward(request, response);

@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import modelo.Usuario;
 import modelo.UsuarioModelo;
+import modelo.Rol;
+import modelo.RolModelo;
 
 /**
  * Servlet implementation class ModificarUsuario
@@ -47,7 +49,13 @@ public class ModificarUsuario extends HttpServlet {
 		}
 		
 		usuario.setFecha_login(fecha_login);
+		
+		String nombre_rol=request.getParameter("rol");
+		RolModelo rolMod = new RolModelo();
+		usuario.setRol(rolMod.getRol(nombre_rol));
+		
 		UsuarioModelo usuarioMod = new UsuarioModelo();
+		
 		usuarioMod.modificarUsuario(usuario);
 		System.out.println("Modificado");
 		
@@ -58,7 +66,6 @@ public class ModificarUsuario extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//request.getRequestDispatcher("ModificarUsuario.jsp").forward(request, response);
 		response.sendRedirect("VerUsuarios");
 	}
 
@@ -66,21 +73,6 @@ public class ModificarUsuario extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Usuario usuario = new Usuario();
-		usuario.setId(Integer.parseInt(request.getParameter("id")));
-		usuario.setNombre(request.getParameter("nombre"));
-		usuario.setPassword(request.getParameter("password"));
-		Date fecha_login = null;
-		
-		try {
-			fecha_login = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("fecha_login"));
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		usuario.setFecha_login(fecha_login);
-		UsuarioModelo usuarioMod = new UsuarioModelo();
-		usuarioMod.modificarUsuario(usuario);
 		
 		
 		

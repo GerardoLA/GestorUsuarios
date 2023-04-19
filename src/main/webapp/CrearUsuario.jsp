@@ -22,6 +22,14 @@
 	<br>
 	<input type="date" name="fecha_login"  placeholder="fecha_login"/><br>
 	<br>
+	<br>
+	<select name ="rol">
+		<c:forEach items="${roles}" var="rol">
+		
+			<option value="${rol.nombre}">${rol.nombre}</option>
+		</c:forEach>
+	
+	</select>
 	
 	<input type=submit value="Crear"/>
 </form>
