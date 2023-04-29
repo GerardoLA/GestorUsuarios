@@ -98,7 +98,7 @@ public boolean eliminarUsuario(int id) {
 }
 
 
-public Usuario getUsuario(int id) {
+public Usuario getUsuario(int id) throws SQLException {
 	Usuario usuario = new Usuario();
 	try {
 		pst = getConexion().prepareStatement("SELECT* from usuarios where id=?");
@@ -120,6 +120,29 @@ public Usuario getUsuario(int id) {
 		
 		e.printStackTrace();
 	}
+	getConexion().close();
 	return usuario;
 }
+
+public Usuario comprobarLogin(String rol,String password) {
+	Usuario usuario = new Usuario();
+	try {
+		pst = getConexion().prepareStatement("SELECT * FROM usuarios WHERE rol=? AND password=?");
+		pst.setString(1, usuario.rol.getNombre());
+		pst.setString(2, password);
+		
+		ResultSet resultado = pst.executeQuery();
+		if(resultado.next()) {
+			usuario.setId(resultado.getInt("id"));
+			usuario.setNombre(resultado.getString("nombre"));
+			usuario.setPassword(resultado.getString(0));
+		}
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+	return usuario;
+}
+
 }

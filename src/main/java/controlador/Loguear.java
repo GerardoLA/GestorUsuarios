@@ -1,8 +1,6 @@
 package controlador;
 
 import java.io.IOException;
-import java.sql.SQLException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,21 +8,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import java.util.ArrayList;
-import modelo.UsuarioModelo;
 import modelo.Usuario;
-import modelo.Rol;
+
 /**
- * Servlet implementation class Principal
+ * Servlet implementation class Loguear
  */
-@WebServlet("/Principal")
-public class Principal extends HttpServlet {
+@WebServlet("/Loguear")
+public class Loguear extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Principal() {
+    public Loguear() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,41 +29,29 @@ public class Principal extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		//Datos
-		UsuarioModelo usuarioMod = new UsuarioModelo();
-		ArrayList<Usuario>usuarios = new ArrayList<>();
-		
-		
-		ArrayList<Rol>roles = new ArrayList<>();
-		
-		try {
-			usuarios=usuarioMod.getUsuarios();
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-		//preparar para vistas
-		request.setAttribute("usuarios", usuarios);
-		request.setAttribute("roles", roles);
-		
-		
-		/**
-		 * Abrir la vista y enviar los usuarios
-		 */
-		request.getRequestDispatcher("ventanaPrincipal.jsp").forward(request, response);
-		}
-	
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */ 
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		String nombre = request.getParameter("nombre");
+		String password = request.getParameter("password");
+		
+		if (nombre.equals("ikaslea") && password.equals("plaiaundi")){
+			Usuario usuarioLogueado = new Usuario();
+			usuarioLogueado.setNombre("ikaslea");
+			
+			HttpSession session = request.getSession();
+			session.setAttribute("usuarioLogueado", usuarioLogueado);
+			
+			response.sendRedirect("Desktop");
+			
+		}else {
+			response.sendRedirect("LoginForm");
+		}
 	}
 
 }

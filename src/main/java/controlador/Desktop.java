@@ -1,8 +1,6 @@
 package controlador;
 
 import java.io.IOException;
-import java.sql.SQLException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,21 +8,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import java.util.ArrayList;
-import modelo.UsuarioModelo;
 import modelo.Usuario;
-import modelo.Rol;
+
 /**
- * Servlet implementation class Principal
+ * Servlet implementation class Desktop
  */
-@WebServlet("/Principal")
-public class Principal extends HttpServlet {
+@WebServlet("/Desktop")
+public class Desktop extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Principal() {
+    public Desktop() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,38 +29,19 @@ public class Principal extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		Usuario usuarioLogueado = (Usuario) session.getAttribute("usuarioLogueado");
 		
-		//Datos
-		UsuarioModelo usuarioMod = new UsuarioModelo();
-		ArrayList<Usuario>usuarios = new ArrayList<>();
-		
-		
-		ArrayList<Rol>roles = new ArrayList<>();
-		
-		try {
-			usuarios=usuarioMod.getUsuarios();
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(usuarioLogueado == null) {
+			response.sendRedirect("LoginForm");
+		}else {
+			request.getRequestDispatcher("desktop.jsp").forward(request, response);
 		}
-		
-		
-		//preparar para vistas
-		request.setAttribute("usuarios", usuarios);
-		request.setAttribute("roles", roles);
-		
-		
-		/**
-		 * Abrir la vista y enviar los usuarios
-		 */
-		request.getRequestDispatcher("ventanaPrincipal.jsp").forward(request, response);
-		}
-	
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */ 
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);

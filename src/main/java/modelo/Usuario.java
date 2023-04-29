@@ -8,7 +8,17 @@ public class Usuario {
 	private String password;
 	private Date fecha_login;
 	Rol rol;
+	
+	public static final String USUARIO = "usuario";
+	public static final String ADMIN = "admin";
 
+	public boolean esAdmin() {
+		return this.rol.getNombre().equals(ADMIN);
+	}
+	
+	public boolean esUsuario() {
+		return this.rol.getNombre().equals(USUARIO);
+	}
 	
 	public Usuario() {
 		super();
