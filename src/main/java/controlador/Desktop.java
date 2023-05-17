@@ -29,14 +29,10 @@ public class Desktop extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		Usuario usuarioLogueado = (Usuario) session.getAttribute("usuarioLogueado");
+
 		
-		if(usuarioLogueado == null) {
-			response.sendRedirect("LoginForm");
-		}else {
 			request.getRequestDispatcher("desktop.jsp").forward(request, response);
-		}
+		
 	}
 
 	/**

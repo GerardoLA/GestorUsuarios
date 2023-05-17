@@ -46,7 +46,7 @@
   </tbody>
       <tr>
     	<td><a href="CrearUsuario" class="btn btn-dark">Registrar Usuario nuevo</a></td>
-    	<td><a href="BuscarUsuario" class="btn btn-dark">Buscar usuario</a></td>
+    	<td><a href="BuscarUsuario.jsp" class="btn btn-dark">Buscar usuario</a></td>
     </tr>
 </table>
 </form>
