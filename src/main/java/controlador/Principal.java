@@ -44,6 +44,7 @@ public class Principal extends HttpServlet {
 		try {
 			usuarios=usuarioMod.getUsuarios();
 			
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
