@@ -37,7 +37,12 @@ public class VerUsuario extends HttpServlet {
 		UsuarioModelo usuarioMod = new UsuarioModelo();
 		Usuario usuario = new Usuario();
 		int id=Integer.parseInt(request.getParameter("id"));
-		usuario=usuarioMod.getUsuario(id);
+		try {
+			usuario=usuarioMod.getUsuario(id);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 
 		 request.setAttribute("usuario",usuario);
